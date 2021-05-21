@@ -29,7 +29,6 @@ const paymentsSlice = createSlice({
       state.holidays.status = FETCH_STATUS_LOADING;
     },
     [fetchBankHolidays.fulfilled]: (state, action) => {
-      console.log('action', action);
       state.holidays.status = FETCH_STATUS_SUCCESS;
       state.holidays.holidaysData = action.payload.data;
     },

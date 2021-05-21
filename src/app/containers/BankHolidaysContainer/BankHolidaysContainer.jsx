@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 
+// Components
+import BankHolidayTable from '../../components/bankHoliday/bankHoliday-table';
+
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -10,14 +13,22 @@ import {
 const BankHolidaysContainer = () => {
   const dispatch = useDispatch();
 
-  const bankHolidays = useSelector(getBankHolidays);
-  console.log('bankHolidays', bankHolidays);
+  const { holidaysData } = useSelector(getBankHolidays);
+  console.log('holidaysData', holidaysData);
 
   useEffect(() => {
     dispatch(fetchBankHolidays());
   }, [dispatch]);
 
-  return <>test</>;
+  return (
+    holidaysData && (
+      <>
+        <BankHolidayTable
+          countryHolidays={holidaysData['england-and-wales'].events}
+        />
+      </>
+    )
+  );
 };
 
 export default BankHolidaysContainer;
