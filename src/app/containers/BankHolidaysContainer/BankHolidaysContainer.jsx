@@ -2,7 +2,9 @@ import React, { useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 
 import Select from '../../components/common/Select';
+import Loader from '../../components/common/Loader';
 import BankHolidayTable from '../../components/bankHoliday/bankHoliday-table';
+import { STATUS_SUCCESS, STATUS_LOADING } from '../../constants/configuration';
 
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,8 +17,8 @@ import {
 const BankHolidaysContainer = () => {
   const dispatch = useDispatch();
 
-  const { holidaysData, selectedCountry } = useSelector(getBankHolidays);
-  console.log('holidaysData', holidaysData);
+  const { holidaysData, selectedCountry, status } =
+    useSelector(getBankHolidays);
 
   useEffect(() => {
     dispatch(fetchBankHolidays());
@@ -26,10 +28,10 @@ const BankHolidaysContainer = () => {
     dispatch(setSelectedCountry(ev.target.value));
   };
 
-  if (!holidaysData) {
-    return '';
+  if (status !== STATUS_SUCCESS) {
+    return <Loader />;
   }
-  const countryNames = holidaysData && Object.keys(holidaysData);
+  const countryNames = Object.keys(holidaysData);
 
   const holidayEvents = selectedCountry
     ? holidaysData[selectedCountry].events
@@ -40,12 +42,10 @@ const BankHolidaysContainer = () => {
       ];
 
   return (
-    holidaysData && (
-      <Container fluid>
-        <Select data={countryNames} handleChange={handleChange} />
-        <BankHolidayTable countryHolidays={holidayEvents} />
-      </Container>
-    )
+    <Container fluid>
+      <Select data={countryNames} handleChange={handleChange} />
+      <BankHolidayTable countryHolidays={holidayEvents} />
+    </Container>
   );
 };
 

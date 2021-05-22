@@ -8,8 +8,10 @@ const Select = ({ data, handleChange }) => {
     <Form>
       <Form.Control as="select" onChange={handleChange} className="select">
         <option value="">Default select</option>
-        {data.map((item) => (
-          <option value={item}>{item}</option>
+        {data.map((item, i) => (
+          <option key={i} value={item}>
+            {item}
+          </option>
         ))}
       </Form.Control>
     </Form>
