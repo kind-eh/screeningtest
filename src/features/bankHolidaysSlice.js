@@ -10,10 +10,10 @@ const initialState = {
   holidays: {
     holidaysData: null,
     status: 'idle',
+    selectedCountry: null,
   },
 };
 
-// Billing
 export const fetchBankHolidays = createAsyncThunk(
   'bankHolidays/fetchBankHolidays',
   async () => {
@@ -21,9 +21,14 @@ export const fetchBankHolidays = createAsyncThunk(
   },
 );
 
-const paymentsSlice = createSlice({
+const bankHolidaysSlice = createSlice({
   name: 'bankHolidays',
   initialState,
+  reducers: {
+    setSelectedCountry: (state, action) => {
+      state.holidays.selectedCountry = action.payload;
+    },
+  },
   extraReducers: {
     [fetchBankHolidays.pending]: (state) => {
       state.holidays.status = FETCH_STATUS_LOADING;
@@ -40,8 +45,10 @@ const paymentsSlice = createSlice({
 });
 
 // Selectors:
-// promo code information
 export const getBankHolidays = (state) => state.bankHolidays.holidays;
 
+// Actions
+export const { setSelectedCountry } = bankHolidaysSlice.actions;
+
 // Reducer
-export default paymentsSlice.reducer;
+export default bankHolidaysSlice.reducer;

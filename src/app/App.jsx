@@ -4,7 +4,7 @@ import BankHolidaysContainer from './containers/BankHolidaysContainer';
 
 const App = () => {
   return (
-    <div className="App">
+    <div>
       <BankHolidaysContainer />
     </div>
   );
