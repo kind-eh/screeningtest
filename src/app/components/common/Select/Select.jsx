@@ -3,13 +3,13 @@ import Form from 'react-bootstrap/Form';
 
 import './Select.css';
 
-const Select = ({ data, handleChange }) => {
+const Select = ({ items, onChange, defaultSelect = 'Default select' }) => {
   return (
     <Form>
-      <Form.Control as="select" onChange={handleChange} className="select">
-        <option value="">Default select</option>
-        {data.map((item, i) => (
-          <option key={i} value={item}>
+      <Form.Control as="select" onChange={onChange} className="select">
+        <option value="">{defaultSelect}</option>
+        {items.map((item, index) => (
+          <option key={index} value={item}>
             {item}
           </option>
         ))}

@@ -1,14 +1,10 @@
 import React from 'react';
+import Spinner from 'react-bootstrap/Spinner';
+
 import './Loader.css';
 
 const Loader = () => {
-  return (
-    <div className="loader">
-      <span className="loader__one" />
-      <span className="loader__two" />
-      <span className="loader__three" />
-    </div>
-  );
+  return <Spinner animation="border" variant="dark" className="loader" />;
 };
 
 export default Loader;

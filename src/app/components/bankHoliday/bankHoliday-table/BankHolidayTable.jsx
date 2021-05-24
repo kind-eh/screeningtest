@@ -3,7 +3,7 @@ import Table from 'react-bootstrap/Table';
 
 import './BankHolidayTable.css';
 
-const BankHolidayTable = ({ countryHolidays }) => {
+const BankHolidayTable = ({ holidayEvents }) => {
   const tableHead = (
     <thead>
       <tr>
@@ -18,10 +18,10 @@ const BankHolidayTable = ({ countryHolidays }) => {
 
   const tableBody = (
     <tbody>
-      {countryHolidays.map(({ bunting, date, notes, title }, i) => {
+      {holidayEvents.map(({ bunting, date, notes, title }, index) => {
         return (
-          <tr key={i}>
-            <td>{i + 1}</td>
+          <tr key={index}>
+            <td>{index + 1}</td>
             <td>{title}</td>
             <td>{date}</td>
             <td>{bunting ? 'Yes' : 'No'}</td>
